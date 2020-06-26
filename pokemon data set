@@ -1,0 +1,51 @@
+#Pokemon
+import pandas as pd
+df=pd.read_csv('D:/python/Practice/194bcff35001e7eb53a2a8b441e8b2c6-92200bc0a673d5ce2110aaad4544ed6c4010f687/pokemon.csv')
+df.dropna(inplace=True)
+
+#finding legendary pokemon
+df_legendary=df.groupby(['Name','Legendary'])
+df_legendary.groups
+
+count=0
+for name,boool in df_legendary.groups:
+    if boool==True:
+        count+=1
+        print(name,end=",")
+print('The total number of legendary pokemons are',count)
+
+#top 3 powerful pokemons
+df_powerful=df.sort_values(by='Total',ascending=False).iloc[:3]
+print(df_powerful)
+
+#question 3
+df_type=df.groupby('Type 1')
+
+#name of all pokemon types using loop
+l=[]
+for name,group in df_type:
+    l.append(name)
+print(l)
+for type1 in l:
+    df_type1=df_type.get_group(type1)
+    print(df_type1)
+
+#or you can do it manually
+df_grass=df_type.get_group('Grass')  
+df_fire=df_type.get_group('Fire')
+df_water=df_type.get_group('Water')
+df_bug=df_type.get_group('Bug')
+df_dark=df_type.get_group('Dark')
+df_dragon=df_type.get_group('Dragon')
+df_electric=df_type.get_group('Electric')
+df_fairy=df_type.get_group('Fairy')
+df_fighting=df_type.get_group('Fighting')
+df_flying=df_type.get_group('Flying')
+df_ghost=df_type.get_group('Ghost')
+df_ground=df_type.get_group('Ground')
+df_ice=df_type.get_group('Ice')
+df_normal=df_type.get_group('Normal')
+df_poisonr=df_type.get_group('Poison')
+df_psychic=df_type.get_group('Psychic')
+df_rock=df_type.get_group('Rock')
+df_steel=df_type.get_group('Steel')
